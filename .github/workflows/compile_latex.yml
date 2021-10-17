@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Complile Tex
 
 # Controls when the workflow will run
 on:
@@ -29,4 +29,7 @@ jobs:
         with:
         # The root LaTeX file to be compiled
          root_file: ./Math/ComplexNumbers/complex.tex
-#          compiler: pdfLaTex
+      - uses: actions/upload-artifact@v2
+        with:
+         name: PDF
+         path: ./Math/ComplexNumbers/complex.pdf
