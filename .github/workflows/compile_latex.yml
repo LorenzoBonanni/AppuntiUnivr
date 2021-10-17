@@ -29,7 +29,12 @@ jobs:
         with:
         # The root LaTeX file to be compiled
          root_file: ./Math/ComplexNumbers/complex.tex
-      - uses: actions/upload-artifact@v2
+      - name: Upload File
+        uses: actions/upload-artifact@v2
         with:
          name: PDF
          path: complex.pdf
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: complex.pdf
