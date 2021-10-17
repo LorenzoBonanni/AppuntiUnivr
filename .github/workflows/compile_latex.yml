@@ -28,5 +28,5 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
         # The root LaTeX file to be compiled
-         root_file: Math/ComplexNumbers/complex.tex
+         root_file: ./Math/ComplexNumbers/complex.tex
 #          compiler: pdfLaTex
