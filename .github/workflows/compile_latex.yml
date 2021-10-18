@@ -24,11 +24,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: Github Action for LaTeX
+      - name: Compile Document
         uses: xu-cheng/latex-action@v2
         with:
         # The root LaTeX file to be compiled
          root_file: ./Math/ComplexNumbers/complex.tex
+      # Removes the latest release, so that we can create a new one in its place
+      - name: Delete latest release
+        uses: ame-yu/action-delete-latest-release@v2
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
