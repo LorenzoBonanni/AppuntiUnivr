@@ -36,5 +36,6 @@ jobs:
          path: complex.pdf
       - name: Release
         uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: complex.pdf
