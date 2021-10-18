@@ -29,13 +29,10 @@ jobs:
         with:
         # The root LaTeX file to be compiled
          root_file: ./Math/ComplexNumbers/complex.tex
-      - name: Upload File
-        uses: actions/upload-artifact@v2
-        with:
-         name: PDF
-         path: complex.pdf
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           files: complex.pdf
+          tag_name: release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
