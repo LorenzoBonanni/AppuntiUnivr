@@ -6,6 +6,7 @@
 \usepgfplotslibrary{fillbetween}
 \usetikzlibrary{patterns, quotes, angles}
 \usepackage{amsmath}
+\usepackage{animate}
 \usepackage[hidelinks]{hyperref}
 
 \title{Complex Numbers}
@@ -162,7 +163,7 @@ Suppose we have the point (3,2) what is the 90° rotation of that point counterc
 \noindent
 Lets calculate the following equation $3*(3+2i)$:
 \\[0.2cm]
-$3*(3+2i) = 3i+2i^2 = 3i+2*(-1) = -2+3i$
+$i*(3+2i) = 3i+2i^2 = 3i+2*(-1) = -2+3i$
 \\[0.1cm]
 As we can see the result is like rotating $3*(3+2i)$ by 90°
 
@@ -333,7 +334,7 @@ $\exp(-1)\cdot\exp(1)=\exp(0)=1$
 \\[0.1cm]
 $\exp(x)=e^x=\exp(1)^x$
 
-\subsection{Powers of $i$}
+\subsection{Powers of i}
 \begin{minipage}{.2\textwidth}
     \begin{tikzpicture}[scale=2.3,cap=round,>=latex]
         % draw the coordinates
@@ -421,6 +422,8 @@ $\theta=1.0000$
                 % draw the unit circle
                 \draw (0cm,0cm) circle(1cm);
                 
+                \def\itetha{(0, 1)};
+                
                 % vectors
                 \draw [->, color=green!40!gray, thick] (0,0) -- (1, 0);
                 \draw [->, color=yellow!60!gray, thick] (1,0) -- (1, 1);
@@ -430,4 +433,74 @@ $\theta=1.0000$
             \end{scope}
         \end{tikzpicture}
     \end{minipage}
+    
+    \newpage
+    \noindent
+    This Particular Formula has a Particularity that independently from the value of $\theta$ the sum of vectors will always end up onto the unit circle
+    \\[0.5cm]
+    \begin{minipage}{.4\textwidth}
+        \begin{center}
+            $\theta = 1.5$
+        \end{center}
+        \begin{tikzpicture}[scale=1.5]
+            \begin{scope}[thick,font=\scriptsize]
+                % Axes:
+                \draw [->] (-2,0) -- (2,0);
+                \draw [->] (0,-2) -- (0,2);
+                
+                % ticks
+                \draw (-1.25cm,0cm) node[below=2pt, scale=0.6] {$-1$}
+                (1.25cm,0cm)  node[below=2pt, scale=0.6] {$1$}
+                (0cm,-1.25cm) node[right=2pt,scale=0.6] {$-i$}
+                (0cm,1.25cm)  node[right=2pt, scale=0.6] {$i$};
+                
+                % draw the unit circle
+                \draw (0cm,0cm) circle(1cm);
+                
+                \def\itetha{(0, 1)};
+                
+                % vectors
+                \draw [->, color=green!40!gray, thick] (0,0) -- (1, 0);
+                \draw [->, color=yellow!60!gray, thick] (1,0) -- (1, 1.5);
+                \draw [->, color=blue!50!gray, thick] (1,1.5) -- (-0.125, 1.5);
+                \draw [->, color=red!50!gray, thick] (-0.125, 1.5) -- (-0.125, 0.9375);
+                \draw [->, color=orange!50!gray, thick] (-0.125, 0.9375) -- (0.0859375, 0.9375);
+                \draw [->, color=magenta!50!gray, thick] (0.0859375, 0.9375) -- (0.0859375, 1.00078125);
+            \end{scope}
+        \end{tikzpicture}
+    \end{minipage}
+    \begin{minipage}{.4\textwidth}
+        \begin{center}
+            $\theta = 2.2$
+        \end{center}
+        \begin{tikzpicture}[scale=1.5]
+            \begin{scope}[thick,font=\scriptsize]
+                % Axes:
+                \draw [->] (-2,0) -- (2,0);
+                \draw [->] (0,-2) -- (0,2);
+                
+                % ticks
+                \draw (-1.25cm,0cm) node[below=2pt, scale=0.6] {$-1$}
+                (1.25cm,0cm)  node[below=2pt, scale=0.6] {$1$}
+                (0cm,-1.25cm) node[right=2pt,scale=0.6] {$-i$}
+                (0cm,1.25cm)  node[right=2pt, scale=0.6] {$i$};
+                
+                % draw the unit circle
+                \draw (0cm,0cm) circle(1cm);
+                
+                \def\itetha{(0, 1)};
+                
+                % vectors
+                \draw [->, color=green!40!gray, thick] (0,0) -- (1, 0);
+                \draw [->, color=yellow!60!gray, thick] (1,0) -- (1, 2.2);
+                \draw [->, color=blue!50!gray, thick] (1, 2.2) -- (-1.4200000000000004, 2.2);
+                \draw [->, color=red!50!gray, thick] (-1.4200000000000004, 2.2) -- (-1.4200000000000004, 0.4253333333333329);
+                \draw [->, color=orange!50!gray, thick] (-1.4200000000000004, 0.4253333333333329) -- (-0.4439333333333334, 0.4253333333333329);
+                \draw [->, color=magenta!50!gray, thick] (-0.4439333333333334, 0.4253333333333329) -- (-0.4439333333333334, 0.8548026666666664);
+                \draw [->, color=cyan!50!gray, thick] (-0.4439333333333334, 0.8548026666666664) -- (-0.6014054222222224, 0.8548026666666664);
+                \draw [->, color=lime!50!gray, thick] (-0.6014054222222224, 0.8548026666666664) -- (-0.6014054222222224, 0.8053114387301584);
+            \end{scope}
+        \end{tikzpicture}
+    \end{minipage}
 \end{document}
+% TODO finish video https://youtu.be/ZxYOEwM6Wbk?t=2114
