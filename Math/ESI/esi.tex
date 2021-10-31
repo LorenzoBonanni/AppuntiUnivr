@@ -1,0 +1,333 @@
+\documentclass{article}
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns, quotes, angles}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage[hidelinks]{hyperref}
+
+\title{Complex Numbers}
+\author{Lorenzo Bonanni}
+\date{October 2021}
+
+\begin{document}
+    \clearpage
+
+    \begin{titlepage}
+       \centering
+       \vspace*{\fill}
+       {\scshape\LARGE Università degli Studi di Verona \par}
+       \vspace{1.5cm}
+       \line(1,0){145} \\
+       {\huge\bfseries Elaborazione Segnali e Immagini\par}
+       \line(1,0){145} \\
+       \vspace{0.5cm}
+       {\scshape\Large Appunti del corso\par}
+       \vspace{2cm}
+       {\Large\itshape Lorenzo Bonanni \par}
+       \vspace{1cm}
+
+       \vspace{5cm}
+       \vspace*{\fill}
+       % Bottom of the page
+       {\large \today\par}
+    \end{titlepage}
+    \thispagestyle{empty}
+
+    \tableofcontents
+
+    \newpage
+    
+    \section{Fondamenti}
+    \subsection{Numeri Complessi}
+    I numeri complessi sono numeri che vengono espressi nella seguente forma\\ $c=Re+jIm$
+    
+    \noindent
+    \begin{minipage}{.5\textwidth}
+        Essi sono rappresentati sul piano complesso mostrando sull'asse delle X la componente reale e sull'asse delle Y la componente Immaginaria
+    \end{minipage}
+    \hspace{0.5cm}
+    \begin{minipage}{.4\textwidth}
+        \begin{tikzpicture}[scale=2.3,cap=round,>=latex]
+            % draw the coordinates
+            \draw[->] (0cm,0cm) -- (1.2cm,0cm) node[right,fill=white] {$Re$};
+            \draw[->] (0cm,0cm) -- (0cm,1.2cm) node[above,fill=white] {$Im$};
+        
+            \draw
+                (0.7,0.7) coordinate (a) node[right,fill=white] {$c$}
+                -- (0,0) coordinate (o)
+                -- (1,0) coordinate (c) 
+                pic["$\Theta$", color=blue, draw=blue, -, angle eccentricity=1.5, angle radius=1cm]
+                {angle=c--o--a};
+            
+            \draw[dotted, thick, color=blue] (0.7,0.7) -- (0.7,0);
+            
+            \draw[dotted, thick, color=blue] (0.7,0.7) -- (0,0.7);
+                
+        \end{tikzpicture}
+    \end{minipage}
+    
+    \noindent
+    Un numero complesso può essere definito
+    \begin{itemize}
+        \item \textbf{Forma Vettoriale}: $c=Re+jIm$
+        \item \textbf{Forma Polare}: $c=|c|(cos(\theta)+jsin(\theta))$
+    \end{itemize}
+
+    \noindent
+    Quest'ultima forma può essere riscritta seguendo la formula di Eulero come $\color{red}|c|e^{j\theta}$ dove $|c|$ è chiamato modulo e rappresenta la lunghezza del vettore mentre $\theta$ è chiamato fase.\\
+    
+    \noindent
+    L'evoluzione è il Fasore ovvero una funzione $\mathbb{R}\rightarrow\mathbb{C}$ fatta nel seguente modo:\\$|c|e^{j\theta(t)}$ in questa funzione $\theta$ non è più fisso ma è una funzione del tempo.\\
+    Questa funzione permette di modellare la posizione di un punto
+    che ruota attorno all’origine con raggio determinato $|c|$ e e velocità angolare costante $\theta(t)$.\\
+    
+    \noindent
+    Così facendo disegno dei cerchi nel piano complesso, la funzione $\theta$ può essere utile riscriverla come:
+    $\Theta(t)=\frac{2\pi}{T_0}t+\phi$ \\dove $2\pi$ rappresenta una rotazione attorno al cerchio unitario, $T_0$ rappresenta il tempo necessario ad effettuare tale rotazione e $\phi$ è la fase iniziale
+    
+    \subsection{Somma Vettoriale}
+    la somma di due vettori $\bar{u}$, $\bar{v}$ è un vettore $\bar{w}$ calcolabile geometricamente
+    \begin{itemize}
+        \begin{minipage}{.4\textwidth}
+            \item regola parallelogramma
+        \end{minipage}
+        \begin{minipage}{.4\textwidth}
+            \begin{tikzpicture}[]
+                % draw the coordinates
+                \draw[->, thick] (0cm,0cm) -- (1.2cm,0cm);
+                \draw[->, thick] (0cm,0cm) -- (0cm,1.2cm);
+            
+                \draw[->, color=red] (0cm,0cm) -- node [midway,above,align=center] {\tiny$\bar{u}$} (0.5cm,0.7cm);
+                \draw[->, color=red] (0cm,0cm) -- node [midway,below,align=center] {\tiny$\bar{v}$} (1cm,0.5cm);
+                
+                \draw[->, color=blue, thick] (0cm,0cm) -- node [midway,above,align=center] {\tiny$\bar{w}$} (1.5cm,1.2cm);
+                
+                \draw[-, color=red, dashed] (0.5cm,0.7cm) -- (1.5cm,1.2cm);
+                \draw[-, color=red, dashed] (1cm,0.5cm) -- (1.5cm,1.2cm);
+                
+            \end{tikzpicture}
+        \end{minipage}
+        
+        \begin{minipage}{.4\textwidth}
+            \item regola punta coda
+        \end{minipage}
+        \begin{minipage}{.4\textwidth}
+            \begin{tikzpicture}[]
+                % draw the coordinates
+                \draw[->, thick] (0cm,0cm) -- (1.2cm,0cm);
+                \draw[->, thick] (0cm,0cm) -- (0cm,1.2cm);
+            
+                \draw[->, color=red] (0cm,0cm) -- node [midway,above,align=center] {\tiny$\bar{u}$} (0.5cm,0.7cm);
+                \draw[->, color=red] (0.5cm,0.7cm) -- node [midway,above,align=center] {\tiny$\bar{v}$} (1.5cm,1.2cm);
+                
+                \draw[->, color=blue, thick] (0cm,0cm) -- node [midway,below,align=center] {\tiny$\bar{w}$} (1.5cm,1.2cm);
+                
+            \end{tikzpicture}
+        \end{minipage}
+    \end{itemize}
+    
+    \noindent
+    \begin{center}
+        $\bar{w} = \bar{u}+\bar{v}$
+    \end{center}
+\newpage
+\subsection{Serie di Fourier}
+    mi fa capire il contenuto frequienziale di un segnale di periodo T ed è espressa ne seguente modo:
+    \begin{align*}
+        f(t)=\sum_{n=-\infty}^{+\infty} c_n\cdot e^{\frac{j2\pi n}{T}t}
+    \end{align*}
+    \begin{center}
+        dove $e^{\frac{j2\pi n}{T}t}$ è un fasore con modulo 1
+    \end{center}
+    
+\subsection{Funzioni Pari e Dispari}
+    \subsubsection{Funzioni Pari}
+        Una funzione $f:\mathbb{R}\rightarrow\mathbb{R}$ è pari sse: $f(t)=f(-t)$\\
+        Ovvero ho una simmetria rispetto all'asse delle $y$
+        \begin{center}
+            \begin{tikzpicture}[domain = -7:7, samples = 1000, scale=0.8]
+                % grid
+                \draw[very thin, color = gray, step=1] (-8,-2.2) grid(8,2.2);
+            
+                % Axes:
+            	\draw [->, thick] (-8,0) -- (8,0);
+            	\draw [->, thick] (0,-2.2) -- (0,2.2);
+        
+                \draw[very thick, color = green!55!gray] plot[id=c] function{cos(2*x)};
+            \end{tikzpicture}
+        \end{center}
+
+    \subsubsection{Funzioni Dispari}
+        Una funzione $f:\mathbb{R}\rightarrow\mathbb{R}$ è dispari sse: $f(t)=-f(-t)$\\
+        Ovvero la funzione è speculare rispetto all'asse delle $x$ cioè dato un punto $x$ e un punto $-x$ essi avranno coordinate sull'asse dell $y$ opposte ((-1, 1), (0.5, -0.5)...)
+        \begin{center}
+            \begin{tikzpicture}[domain = -7:7, samples = 1000, scale=0.8]
+                % grid
+                \draw[very thin, color = gray, step=1] (-8,-2.2) grid(8,2.2);
+            
+                % Axes:
+            	\draw [->, thick] (-8,0) -- (8,0);
+            	\draw [->, thick] (0,-2.2) -- (0,2.2);
+        
+                \draw[very thick, color = blue] plot[id=c] function{sin(2*x)};
+            \end{tikzpicture}
+        \end{center}
+    \newpage
+    
+    \subsection{Segnali Periodici}
+        Un segnale $f$ è periodico di periodo T o T-periodo se:\\
+        \begin{center}
+            $\exists T_0\in R^+:f(t+T_0)=f(t),\quad \forall t\in D_1$
+        \end{center}
+        e $T_0$ è il minor numero per cui la condizione di ripetizione si verifica\\
+        
+        \noindent
+        Dato un periodo $T_0$ si usa indicare con $\mu_0$ la "frequenza fondamentale"\\ $\mu_0=1/T_0$ misurata in Hz
+    \subsection{Segnali Periodici-Trigonometrici}
+    Fissato $T_0>0$ i segnali trigonometrici di minimo periodo $T_0$ sono:\\
+    \begin{center}
+        $f(t)=cos2\pi\mu_0t \qquad\qquad f(t)=sin2\pi\mu_0t$
+    \end{center}
+    dove $\mu$ è una frequenza, $\mu_0=\frac{1}{T_0}$ \textit{frequenza fondamentale}\\
+    
+    \noindent
+    La formula $2\pi\mu_0$ può anche essere scritta come $\frac{2\pi}{T_0}$
+    
+    \subsection{Operazioni Fondamentali}
+    Dati due segnali $f,g$ arbitrari (monodimensionali)
+    
+    \begin{itemize}
+        \item \textbf{SOMMA} $h(t)=f(t)+g(t)\quad\forall t\in D_1$\\
+        Funzioni che non si sovrappongono\\
+        %f(t)
+        \begin{minipage}{.15\textwidth}
+            \begin{tikzpicture}[domain = -1.5:0, samples = 1000, scale=0.5]
+            
+                % Axes:
+            	\draw [->, thick] (-2,0) -- (2,0);
+            	\draw [->, thick] (0,-1.8) -- (0,1.8) node[right,fill=white] {$f(t)$};
+        
+                \draw[very thick, color = green!55!gray] plot[id=c] function{cos(2*x)};
+            \end{tikzpicture}
+        \end{minipage}
+        \hspace{0.2cm}
+        \begin{minipage}{.05\textwidth}
+            \textbf{+}
+        \end{minipage}
+        \begin{minipage}{.15\textwidth}
+            \begin{tikzpicture}[domain = 0:1.5, samples = 1000, scale=0.5]
+            
+                % Axes:
+            	\draw [->, thick] (-2,0) -- (2,0);
+            	\draw [->, thick] (0,-1.8) -- (0,1.8) node[right,fill=white] {$g(t)$};
+        
+                \draw[very thick, color = blue] plot[id=c] function{cos(2*x)};
+            \end{tikzpicture}
+        \end{minipage}
+        \hspace{0.2cm}
+        \begin{minipage}{.05\textwidth}
+            \textbf{+}
+        \end{minipage}
+        \begin{minipage}{.15\textwidth}
+            \begin{tikzpicture}[domain = -1.5:1.5, samples = 1000, scale=0.5]
+            
+                % Axes:
+            	\draw [->, thick] (-2,0) -- (2,0);
+            	\draw [->, thick] (0,-1.8) -- (0,1.8) node[right,fill=white] {$f(t)+g(t)$};
+        
+                \draw[very thick] plot[id=c] function{cos(2*x)};
+            \end{tikzpicture}
+        \end{minipage}
+        
+        Funzioni che si sovrappongono\\
+        %f(t)
+        \begin{minipage}{.15\textwidth}
+            \begin{tikzpicture}[domain = -1.5:0, samples = 1000, scale=0.5]
+            
+                % Axes:
+            	\draw [->, thick] (-2,0) -- (2,0);
+            	\draw [->, thick] (0,-1.8) -- (0,1.8) node[right,fill=white] {$f(t)$};
+        
+                \draw[very thick, color = green!55!gray] (-1, 0) -- (0, 1.2);
+                \draw[very thick, color = green!55!gray] (1, 0) -- (0, 1.2);
+            \end{tikzpicture}
+        \end{minipage}
+        \hspace{0.2cm}
+        \begin{minipage}{.05\textwidth}
+            \textbf{+}
+        \end{minipage}
+        \begin{minipage}{.15\textwidth}
+            \begin{tikzpicture}[domain = 0:1.5, samples = 1000, scale=0.5]
+            
+                % Axes:
+            	\draw [->, thick] (-2,0) -- (2,0);
+            	\draw [->, thick] (0,-1.8) -- (0,1.8) node[right,fill=white] {$g(t)$};
+        
+                \draw[very thick, color = blue] (0, 0) -- (1, -1.2);
+                \draw[very thick, color = blue] (1, -1.2) -- (2, 0);
+            \end{tikzpicture}
+        \end{minipage}
+        \hspace{0.2cm}
+        \begin{minipage}{.05\textwidth}
+            \textbf{+}
+        \end{minipage}
+        \begin{minipage}{.15\textwidth}
+            \begin{tikzpicture}[domain = -1.5:1.5, samples = 1000, scale=0.5]
+            
+                % Axes:
+            	\draw [->, thick] (-2,0) -- (2,0);
+            	\draw [->, thick] (0,-1.8) -- (0,1.8) node[right,fill=white] {$f(t)+g(t)$};
+        
+                \draw[very thick] (-1, 0) -- (0, 1.2);
+                \draw[very thick] (0, 1.2) -- (1, -1.2);
+                \draw[very thick] (1, -1.2) -- (2, 0);
+            \end{tikzpicture}
+        \end{minipage}
+        \item \textbf{PRODOTTO} $h(t)=f(t)\cdot g(t)\quad\forall t\in D_1$
+        \item \textbf{AMPLIFICAZIONE} $h(t)=\lambda f(t)\quad\forall t\in D_1$
+        \item \textbf{SHIFT(o TRASLAZIONE)} $\forall f(t):D_1\in\mathbb{R}, \quad \tau\in\mathbb{R}^+$\\
+        \begin{minipage}{.15\textwidth}
+            \begin{tikzpicture}[scale=0.5]
+                % Axes:
+            	\draw [->, thick] (-2,0) -- (5,0);
+            	\draw [->, thick] (0,-0.5) -- (0,2.5) node[right,fill=white] {$f(t-\tau)$};
+        
+                \draw[dashed, thick] (-1, 0) -- (-1, 2) -- (1, 2) -- (1, 0);
+                \draw[->, color=red] (1, 1) -- node [midway,above right,align=center] {$+\tau$} (4.5, 1);
+                \draw[thick] (2.5, 0) -- (2.5, 2) -- (4.5, 2) -- (4.5, 0);
+            \end{tikzpicture}
+        \end{minipage}
+    \end{itemize}
+    \newpage
+    \subsection{Segnali Continui di uso Comune}
+    \subsubsection{Funzione box e impulso di Dirac}
+    Funzione box (su x continuo e reale):\\
+    $\Pi(x)=\begin{cases}
+        1, \quad -0.5\leq x\leq 0.5\\
+        0, \quad altrimenti
+    \end{cases}$\\
+    
+    \noindent
+    Funzione box generica:\\
+    $A\Pi(x/b)\quad x\in[-b/2,b/2]$\\
+    \begin{tikzpicture}[scale=0.5]
+        % Axes:
+    	\draw [->, thick] (-2,0) -- (3,0);
+    	\draw [->, thick] (0,-0.5) -- (0,3.5) node[right] {$A\Pi(x/b)$};
+
+        \draw[thick] (-1, 0) node [below, align=center] {\small$-b/2$} -- (-1, 2) 
+                             -- node [midway,above right,align=center] {\small$A$} (1, 2) 
+                             -- (1, 0) node [below, align=center] {\small$b/2$};
+        
+        
+    \end{tikzpicture}
+    
+\end{document}

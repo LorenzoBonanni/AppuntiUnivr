@@ -28,7 +28,9 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
         # The root LaTeX file to be compiled
-         root_file: ./Math/ComplexNumbers/complex.tex
+         root_file: |
+          ./Math/ComplexNumbers/complex.tex
+          ./Math/ESI/esi.tex
       # Removes the latest release, so that we can create a new one in its place
       - name: Delete latest release
         uses: ame-yu/action-delete-latest-release@v2
@@ -37,7 +39,9 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: complex.pdf
+          files: |
+           complex.pdf
+           esi.pdf
           tag_name: release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
