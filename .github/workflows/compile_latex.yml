@@ -31,6 +31,7 @@ jobs:
          root_file: |
           ./Math/ComplexNumbers/complex.tex
           ./Math/ESI/esi.tex
+         latexmk_shell_escape: true
       # Removes the latest release, so that we can create a new one in its place
       - name: Delete latest release
         uses: ame-yu/action-delete-latest-release@v2
