@@ -32,6 +32,7 @@ jobs:
           ./Math/ComplexNumbers/complex.tex
           ./Math/ESI/esi.tex
          latexmk_shell_escape: true
+         extra_system_packages: "gnuplot"
       # Removes the latest release, so that we can create a new one in its place
       - name: Delete latest release
         uses: ame-yu/action-delete-latest-release@v2
